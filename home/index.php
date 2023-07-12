@@ -4,20 +4,20 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Home</title>
+    <title>Daily Expense Tracker | Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
   </head>
-  <body class="bg-secondary">
+  <body background="../img/background_image.jpg">
     <?php
         if(!isset($_SESSION["user"])){
             header("Location:../login/");
         }
     ?>
     
-    <div class="container-fluid"> 
+    <div class="container"> 
 
     <div class="card" style="margin-top:15px;">
-        <h2 class="text-center" style="margin-top:10px;">Daily Expenses Tracking System</h2> 
+        <h2 class="text-center" style="margin-top:10px;">Daily Expenses Tracker Dashboard</h2> 
         
         <div class="card-body"> 
                     <div class="row">
@@ -47,7 +47,7 @@
                             if($result>0){
                             ?>
                         
-                                    <table class="table">
+                                    <table class="table table-responsive">
                                                 <thead>
                                                     <tr>
                                                     <th scope="col">#</th>
@@ -92,7 +92,7 @@
                                                                     <td><?php echo $row["Remarks"]; ?></td>
                                                                     <td><?php echo date("d/m/Y", strtotime($row["Date_Created"])); ?></td>
                                                                     <td><?php if($row["Date_Modified"]!=''){ echo date("d/m/Y", strtotime($row["Date_Modified"])); } ?></td>
-                                                                    <td><a href="../update/?id=<?php echo $row["Id"];?>" class="btn btn-primary">Edit</a> <a href="../delete/delete_code.php?id=<?php echo $row["Id"];?>" class="btn btn-primary" onclick="return confirm('Are you sure?')">Delete</a></td>
+                                                                    <td><a href="../update/?id=<?php echo $row["Id"];?>" class="btn btn-primary">Edit</a> <a href="../delete/delete_code.php?id=<?php echo $row["Id"];?>" class="btn btn-primary" onclick="return confirm('Are you sure?')" style="margin-left:20px;">Delete</a></td>
                                                                     </tr>
                                                 <?php
                                                             }       

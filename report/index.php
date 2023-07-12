@@ -4,20 +4,20 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Report Generation</title>
+    <title>Daily Expense Tracker | Report Generation</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
   </head>
-  <body class="bg-secondary">
+  <body background="../img/background_image.jpg">
     <?php
         if(!isset($_SESSION["user"])){
             header("Location:../login/");
         }
     ?>
     
-    <div class="container-fluid"> 
+    <div class="container"> 
 
     <div class="card" style="margin-top:15px;">
-        <h2 class="text-center" style="margin-top:10px;">Daily Expenses Tracking System Report Generation</h2> 
+        <h2 class="text-center" style="margin-top:10px;">Daily Expenses Tracker Report</h2> 
         
         <div class="card-body"> 
                     <div class="row">
@@ -55,7 +55,7 @@
                                     <a id="exporttable" class="btn btn-primary">Export To Excel</a>
                                 </div>
                                 <div class="col-auto">
-                                    <a href="../index.php" class="btn btn-primary">Go Back</a>
+                                    <a href="../index.php" class="btn btn-primary">Back</a>
                                 </div>
 
                             </form>
@@ -77,7 +77,7 @@
                                 $to_date = $_POST['to_date'];
                             ?>
                         
-                                    <table id="htmltable" class="table">
+                                    <table id="htmltable" class="table table-responsive">
                                                 <thead>
                                                     <tr>
                                                     <th scope="col">#</th>

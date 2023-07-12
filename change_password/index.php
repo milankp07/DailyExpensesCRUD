@@ -4,10 +4,10 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Change Password</title>
+    <title>Daily Expense Tracker | Change Password</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
   </head>
-  <body class="bg-secondary">
+  <body background="../img/background_image.jpg">
   <?php 
 
     if(isset($_SESSION["user"])){
@@ -20,8 +20,8 @@
     
     <div class="container"> 
     
-    <div class="card" style="width: 30rem; height:29.2rem; margin:100px auto;">
-        <h2 class="text-center" style="margin-top:10px;">Daily Expense System Change Old Password</h2>
+    <div class="card" style="width: 30rem; height:27.3rem; margin:100px auto;">
+        <h2 class="text-center" style="margin-top:10px;">Change Old Password</h2>
 
         <div class="card-body">   
                     <div class="row">
