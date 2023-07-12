@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login</title>
+    <title>Log In</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
   </head>
   <body>
@@ -20,22 +20,24 @@
     
     <div class="container"> 
     
-    <div class="card" style="width: 30rem; height:20rem; margin:100px auto;">
-        <h2 class="text-center" style="margin-top:10px;">Daily Expense System Login</h2>
+    <div class="card" style="width: 30rem; height:17.5rem; margin:100px auto;">
+        <h2 class="text-center" style="margin-top:10px;">Daily Expense System Log In</h2>
 
         <div class="card-body">   
                     <div class="row">
                         <div class="col-md-12">
-                            <form action="" method="POST">
-                                <div class="mb-3">
-                                    <label for="username" class="form-label">Username</label>
-                                    <input type="text" name="username" class="form-control" id="username" required>
+                            <form action="" method="POST" class="form-floating">
+                                <div class="form-floating mb-3">
+                                    <input type="text" name="username" class="form-control" id="username" placeholder="Username" required>
+                                    <label for="username">Username</label>
                                 </div>
-                                <div class="mb-3">
-                                    <label for="password" class="form-label">Password</label>
-                                    <input type="password" name="password" class="form-control" id="password" required>
+                                <div class="form-floating mb-3">
+                                    <input type="password" name="password" class="form-control" id="password" placeholder="Password" required>
+                                    <label for="password">Password</label>
                                 </div>
-                                <input type="submit" name="login" value="Login" class="btn btn-primary">
+                                <input type="submit" name="login" value="Log In" class="btn btn-primary">
+                                <a href="../signup/" class="btn btn-primary">Sign Up</a>
+                                <a href="../change_password/" class="btn btn-primary">Change Password</a>
                             </form>
 
                             <?php
@@ -44,7 +46,7 @@
                                 if(isset($_POST['login'])){
                                   
                                   $username=$_POST['username'];
-                                  $password=$_POST['password'];
+                                  $password=md5($_POST['password']);
 
                                   $sql="SELECT * FROM login_users WHERE username=:username AND password=:password";
                                 

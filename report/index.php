@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Home</title>
+    <title>Report Generation</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
   </head>
   <body>
@@ -17,13 +17,13 @@
     <div class="container-fluid"> 
 
     <div class="card" style="margin-top:15px;">
-        <h2 class="text-center" style="margin-top:10px;">Daily Expenses Tracking System</h2> 
+        <h2 class="text-center" style="margin-top:10px;">Daily Expenses Tracking System Report Generation</h2> 
         
         <div class="card-body"> 
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                         </div>
-                        <div class="col-md-5">
+                        <div class="col-md-3">
                         </div>
                         <div class="col-md-3">
                         <h4><span class="badge rounded-pill text-bg-light"><?php if(isset($_SESSION["user"])){echo $_SESSION["user"];}?></span>
@@ -31,23 +31,53 @@
                         </h4>
                         </div>
                     </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+
+                            <form class="row g-3" action="" method="POST">
+                                <div class="col-auto">
+                                    <label for="from_date" class="" style="margin-top:6px;">From Date</label>
+                                </div>
+                                <div class="col-auto">
+                                    <input type="date" class="form-control" name="from_date" id="from_date" placeholder="Enter From Date" required>
+                                </div>
+                                <div class="col-auto">
+                                    <label for="to_date" class="" style="margin-top:6px;">To Date</label>
+                                </div>
+                                <div class="col-auto">
+                                    <input type="date" class="form-control" name="to_date" id="to_date" placeholder="Enter To Date" required>
+                                </div>
+                                <div class="col-auto">
+                                    <input type="submit" name="generate_report" value="Generate" class="btn btn-primary mb-3">
+                                </div>
+                                <div class="col-auto">
+                                    <a id="exporttable" class="btn btn-primary">Export To Excel</a>
+                                </div>
+                                <div class="col-auto">
+                                    <a href="../index.php" class="btn btn-primary">Go Back</a>
+                                </div>
+
+                            </form>
+
+                            
+                        </div>
+                        <div class="col-md-3">
+                        </div>
+                        <div class="col-md-3">
+                        </div>
+                    </div>
+                    
                     <div class="row">
                         <div class="col-md-12">
                         <?php 
-                            require "../db/database.php";
-                            
-                            $sql="SELECT * FROM daily_expenses";
+                            if(isset($_POST['generate_report'])){
 
-                            $stmt = $pdo->prepare($sql);
-
-                            $stmt->execute();
-
-                            $result = $stmt->rowCount();
-
-                            if($result>0){
+                                $from_date = $_POST['from_date'];
+                                $to_date = $_POST['to_date'];
                             ?>
                         
-                                    <table class="table">
+                                    <table id="htmltable" class="table">
                                                 <thead>
                                                     <tr>
                                                     <th scope="col">#</th>
@@ -59,7 +89,6 @@
                                                     <th scope="col">Remarks</th>
                                                     <th scope="col">Date Added</th>
                                                     <th scope="col">Date Modifed</th>
-                                                    <th scope="col">Edit/Delete Record</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -70,8 +99,8 @@
                                                         try {
 
                                                             $sql = "SELECT Id,Product_Name,Buying_Description,Price,Purchased_By,Date_Purchased,
-                                                            Remarks,Date_Created,Date_Modified,ROW_NUMBER() OVER (ORDER BY Id DESC) Row_Num 
-                                                            FROM daily_expenses LIMIT 10";
+                                                            Remarks,Date_Created,Date_Modified,ROW_NUMBER() OVER (ORDER BY Id) Row_Num FROM daily_expenses
+                                                            WHERE Date_Created >= '$from_date' AND Date_Created <= '$to_date' ";
 
                                                             $stmt = $pdo->prepare($sql);
 
@@ -92,7 +121,6 @@
                                                                     <td><?php echo $row["Remarks"]; ?></td>
                                                                     <td><?php echo date("d/m/Y", strtotime($row["Date_Created"])); ?></td>
                                                                     <td><?php if($row["Date_Modified"]!=''){ echo date("d/m/Y", strtotime($row["Date_Modified"])); } ?></td>
-                                                                    <td><a href="../update/?id=<?php echo $row["Id"];?>" class="btn btn-primary">Edit</a> <a href="../delete/delete_code.php?id=<?php echo $row["Id"];?>" class="btn btn-primary" onclick="return confirm('Are you sure?')">Delete</a></td>
                                                                     </tr>
                                                 <?php
                                                             }       
@@ -109,7 +137,6 @@
                         }
                         else {
                             ?>
-                            <h4 class="text-centre">No records found. Please add one by clicking "Add New Item" button.</h4>
                         <?php
                         }
 
@@ -117,49 +144,13 @@
                     
                         
                         </div>
-                    </div>
-                    <div class="row">
-                            <div class="col-md-4">
-                                <a href="../add/" class="btn btn-primary">Add Expense</a>
-                                <a href="../report/" class="btn btn-primary">Generate Report</a>
-                            </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-3 text-centre">
-                        <?php if(isset($_SESSION["update_message"])){
-                                ?>
-                                    <div class="alert alert-success" role="alert" style="margin-top:10px;">
-                                        <?php echo $_SESSION["update_message"]; ?>
-                                    </div>
-                        <?php        
-                                unset($_SESSION["update_message"]);
-                            }
-                        elseif(isset($_SESSION["add_message"])){
-                        ?>
-                        
-                        <div class="alert alert-success" role="alert" style="margin-top:10px;">
-                                        <?php echo $_SESSION["add_message"]; ?>
-                        </div>
-
-                        <?php
-                            unset($_SESSION["add_message"]);
-                        }
-                        elseif(isset($_SESSION["delete_message"])){
-                            ?>
-                            
-                            <div class="alert alert-success" role="alert" style="margin-top:10px;">
-                                            <?php echo $_SESSION["delete_message"]; ?>
-                            </div>
-    
-                            <?php
-                                unset($_SESSION["delete_message"]);
-                            }
-                        ?>
-                        </div>
-                    </div>
+                    </div>            
                                         </div>
                                         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/jquery.table2excel.min.js"></script>
+    <script src="../js/export.js" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
-  </body>
+    </body>
 </html>
