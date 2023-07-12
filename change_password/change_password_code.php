@@ -24,16 +24,16 @@ session_start();
                                         
                                         if($result==1 && $new_password==$new_confirm_password){
 
-                                            $sql="UPDATE login_users SET Password=:password,Modified_At=CURRENT_TIMESTAMP WHERE username=:username";
+                                            $sql_update="UPDATE login_users SET Password=:password,Modified_At=CURRENT_TIMESTAMP WHERE username=:username";
                                     
-                                            $stmt = $pdo->prepare($sql);
+                                            $stmt_update = $pdo->prepare($sql_update);
     
-                                            $data = [
+                                            $data_update = [
                                             ":username"=>$username,
                                             ":password"=>md5($new_password)
                                             ];
     
-                                            $stmt->execute($data);
+                                            $stmt_update->execute($data_update);
 
                                             $_SESSION["successful_message"]="Password modified successfully. Please check.";
                                             header("Location:../change_password/");
