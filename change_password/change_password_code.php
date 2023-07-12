@@ -24,13 +24,13 @@ session_start();
                                         
                                         if($result==1 && $new_password==$new_confirm_password){
 
-                                            $sql_update="UPDATE login_users SET Password=:password,Modified_At=CURRENT_TIMESTAMP WHERE username=:username";
+                                            $sql_update="UPDATE login_users SET Password=:new_password,Modified_At=CURRENT_TIMESTAMP WHERE username=:username";
                                     
                                             $stmt_update = $pdo->prepare($sql_update);
     
                                             $data_update = [
                                             ":username"=>$username,
-                                            ":password"=>md5($new_password)
+                                            ":new_password"=>md5($new_password)
                                             ];
     
                                             $stmt_update->execute($data_update);
