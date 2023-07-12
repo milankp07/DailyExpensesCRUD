@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 09, 2023 at 09:47 AM
+-- Generation Time: Jul 12, 2023 at 03:18 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -39,13 +39,6 @@ CREATE TABLE `daily_expenses` (
   `Date_Modified` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `daily_expenses`
---
-
-INSERT INTO `daily_expenses` (`Id`, `Product_Name`, `Buying_Description`, `Price`, `Purchased_By`, `Date_Purchased`, `Remarks`, `Date_Created`, `Date_Modified`) VALUES
-(13, 'Groceries', '2 Pack Snacks, 4 Pack Biscuits', 200, 'Hari Chandan Pani', '2023-04-10', 'From JioMart', '2023-07-09', '2023-07-09');
-
 -- --------------------------------------------------------
 
 --
@@ -59,14 +52,6 @@ CREATE TABLE `login_users` (
   `Created_At` date NOT NULL,
   `Modified_At` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `login_users`
---
-
-INSERT INTO `login_users` (`Id`, `Username`, `Password`, `Created_At`, `Modified_At`) VALUES
-(1, 'Milan', 'milan@123', '2023-07-08', NULL),
-(2, 'Srusti ', 'srusti@123', '2023-07-09', NULL);
 
 -- --------------------------------------------------------
 
@@ -122,13 +107,13 @@ ALTER TABLE `select_options`
 -- AUTO_INCREMENT for table `daily_expenses`
 --
 ALTER TABLE `daily_expenses`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `login_users`
 --
 ALTER TABLE `login_users`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `select_options`
