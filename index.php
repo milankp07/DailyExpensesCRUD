@@ -2,4 +2,8 @@
 
     header("Location:home/");
 
+?><?php
+
+    header("Location:home/");
+
 ?>

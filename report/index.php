@@ -36,25 +36,20 @@
                         <div class="col-md-6">
 
                             <form class="row g-3" action="" method="POST">
-                                <div class="col-auto">
-                                    <label for="from_date" class="" style="margin-top:6px;">From Date</label>
-                                </div>
-                                <div class="col-auto">
+                                <div class="row-auto">
+                                    <label for="from_date" class="">From Date</label>
                                     <input type="date" class="form-control" name="from_date" id="from_date" placeholder="Enter From Date" required>
                                 </div>
-                                <div class="col-auto">
-                                    <label for="to_date" class="" style="margin-top:6px;">To Date</label>
-                                </div>
-                                <div class="col-auto">
+                                <div class="row-auto">
+                                    <label for="to_date" class="">To Date</label>
                                     <input type="date" class="form-control" name="to_date" id="to_date" placeholder="Enter To Date" required>
                                 </div>
-                                <div class="col-auto">
+                                <div class="row-auto">
                                     <input type="submit" name="generate_report" value="Generate" class="btn btn-primary mb-3">
                                 </div>
-                                <div class="col-auto">
+                                <div class="row-auto">
                                     <a id="exporttable" class="btn btn-primary">Export To Excel</a>
-                                </div>
-                                <div class="col-auto">
+                            
                                     <a href="../index.php" class="btn btn-primary">Back</a>
                                 </div>
 
@@ -67,7 +62,7 @@
                         <div class="col-md-3">
                         </div>
                     </div>
-                    
+                    <hr>
                     <div class="row">
                         <div class="col-md-12">
                         <?php 
@@ -76,9 +71,9 @@
                                 $from_date = $_POST['from_date'];
                                 $to_date = $_POST['to_date'];
                             ?>
-                        
-                                    <table id="htmltable" class="table table-responsive">
-                                                <thead>
+                                    <div style="overflow-x:auto">
+                                    <table id="htmltable" class="table table-stripped table-responsive table-dark" style="width:2000px;">
+                                                <thead class="thead-dark">
                                                     <tr>
                                                     <th scope="col">#</th>
                                                     <th scope="col">Product Name</th>
@@ -132,6 +127,8 @@
                                                                 ?>
                                                 </tbody>
                                         </table>
+                                        </div>
+
                         <?php        
 
                         }

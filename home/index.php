@@ -17,7 +17,7 @@
     <div class="container"> 
 
     <div class="card" style="margin-top:15px;">
-        <h2 class="text-center" style="margin-top:10px;">Daily Expenses Tracker Dashboard</h2> 
+        <h2 class="text-center" style="margin-top:10px;">Daily Expenses Tracker</h2> 
         
         <div class="card-body"> 
                     <div class="row">
@@ -46,8 +46,8 @@
 
                             if($result>0){
                             ?>
-                        
-                                    <table class="table table-responsive">
+                                    <div style="overflow-x:auto;">
+                                    <table class="table table-stripped table-responsive table-dark" style="width:2000px;">
                                                 <thead>
                                                     <tr>
                                                     <th scope="col">#</th>
@@ -92,7 +92,7 @@
                                                                     <td><?php echo $row["Remarks"]; ?></td>
                                                                     <td><?php echo date("d/m/Y", strtotime($row["Date_Created"])); ?></td>
                                                                     <td><?php if($row["Date_Modified"]!=''){ echo date("d/m/Y", strtotime($row["Date_Modified"])); } ?></td>
-                                                                    <td><a href="../update/?id=<?php echo $row["Id"];?>" class="btn btn-primary">Edit</a> <a href="../delete/delete_code.php?id=<?php echo $row["Id"];?>" class="btn btn-primary" onclick="return confirm('Are you sure?')" style="margin-left:20px;">Delete</a></td>
+                                                                    <td><a href="../update/?id=<?php echo $row["Id"];?>" class="btn btn-primary">Edit</a> <a href="../delete/delete_code.php?id=<?php echo $row["Id"];?>" class="btn btn-primary" onclick="return confirm('Are you sure?')">Delete</a></td>
                                                                     </tr>
                                                 <?php
                                                             }       
@@ -104,6 +104,7 @@
                                                                 ?>
                                                 </tbody>
                                         </table>
+                                        </div>
                         <?php        
 
                         }
@@ -118,6 +119,7 @@
                         
                         </div>
                     </div>
+                    <hr>
                     <div class="row">
                             <div class="col-md-4">
                                 <a href="../add/" class="btn btn-primary">Add Expense</a>

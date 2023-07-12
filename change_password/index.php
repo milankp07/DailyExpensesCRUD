@@ -20,7 +20,7 @@
     
     <div class="container"> 
     
-    <div class="card" style="width: 30rem; height:27.3rem; margin:100px auto;">
+    <div class="card" style="width:22.5rem; height:27.3rem; margin:100px auto;">
         <h2 class="text-center" style="margin-top:10px;">Change Old Password</h2>
 
         <div class="card-body">   
