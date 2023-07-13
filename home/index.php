@@ -112,7 +112,7 @@ session_start();?>
                         }
                         else {
                             ?>
-                            <h4 class="text-centre">No records found. Please add one by clicking "Add New Item" button.</h4>
+                            <h4 class="text-centre">No records found. Please add one by clicking "Add Expense" button.</h4>
                         <?php
                         }
 
