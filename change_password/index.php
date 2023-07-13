@@ -1,4 +1,6 @@
-<?php session_start(); ?>
+<?php 
+ob_start();
+session_start(); ?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -9,11 +11,10 @@
   </head>
   <body background="../img/background_image.jpg">
   <?php 
-
-    if(isset($_SESSION["user"])){
+  
+  if(isset($_SESSION["user"])){
       header("Location:../home/");
     }
-  
   ?>
             
 

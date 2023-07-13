@@ -1,9 +1,9 @@
 <?php
-
-    header("Location:home/");
-
-?><?php
-
-    header("Location:home/");
+    ob_start();
+    if(isset($_SESSION["user"])){
+        header("Location:home/");}
+    else{
+        header("Location:login/");
+    }
 
 ?>
