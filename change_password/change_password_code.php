@@ -9,7 +9,7 @@ session_start();
                                     $new_password=$_POST['new_password'];
                                     $new_confirm_password=$_POST['new_confirm_password'];
                                     
-                                    $sql="SELECT * FROM login_users WHERE username=:username AND password=:password";
+                                    $sql="SELECT * FROM login_users WHERE username=:username AND password=:password AND status='A'";
                                     
                                         $stmt = $pdo->prepare($sql);
     

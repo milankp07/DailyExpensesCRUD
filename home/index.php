@@ -59,7 +59,9 @@ session_start();?>
                                                     <th scope="col">Purchased By</th>
                                                     <th scope="col">Date Purchased</th>
                                                     <th scope="col">Remarks</th>
+                                                    <th scope="col">Added By</th>
                                                     <th scope="col">Date Added</th>
+                                                    <th scope="col">Modifed By</th>
                                                     <th scope="col">Date Modifed</th>
                                                     <th scope="col">Edit/Delete Record</th>
                                                     </tr>
@@ -72,7 +74,7 @@ session_start();?>
                                                         try {
 
                                                             $sql = "SELECT Id,Product_Name,Buying_Description,Price,Purchased_By,Date_Purchased,
-                                                            Remarks,Date_Created,Date_Modified,ROW_NUMBER() OVER (ORDER BY Id DESC) Row_Num 
+                                                            Remarks,Created_By,Date_Created,Modified_By,Date_Modified,ROW_NUMBER() OVER (ORDER BY Id DESC) Row_Num 
                                                             FROM daily_expenses LIMIT 10";
 
                                                             $stmt = $pdo->prepare($sql);
@@ -92,7 +94,9 @@ session_start();?>
                                                                     <td><?php echo $row["Purchased_By"]; ?></td>
                                                                     <td><?php echo date("d/m/Y", strtotime($row["Date_Purchased"])); ?></td>
                                                                     <td><?php echo $row["Remarks"]; ?></td>
+                                                                    <td><?php echo $row["Created_By"]; ?></td>
                                                                     <td><?php echo date("d/m/Y", strtotime($row["Date_Created"])); ?></td>
+                                                                    <td><?php echo $row["Modified_By"]; ?></td>
                                                                     <td><?php if($row["Date_Modified"]!=''){ echo date("d/m/Y", strtotime($row["Date_Modified"])); } ?></td>
                                                                     <td><a href="../update/?id=<?php echo $row["Id"];?>" class="btn btn-primary">Edit</a> <a href="../delete/delete_code.php?id=<?php echo $row["Id"];?>" class="btn btn-primary" onclick="return confirm('Are you sure?')">Delete</a></td>
                                                                     </tr>

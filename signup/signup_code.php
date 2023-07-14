@@ -10,20 +10,43 @@ session_start();
                                   
                                   if($password==$confirm_password){
                                   
-                                  $sql="INSERT INTO login_users (Username,Password,Created_At) 
-                                  VALUES (:username,:password,CURRENT_TIMESTAMP)";
-                                
-                                  $stmt = $pdo->prepare($sql);
+                                  #Check user exists.
+                                  $sql_check="SELECT * FROM login_users WHERE Username=:username_check";
 
-                                  $data = [
-                                    ":username"=>$username,
-                                    ":password"=>md5($password)
-                                  ];
+                                  $stmt_check=$pdo->prepare($sql_check);
 
-                                  $stmt->execute($data);
+                                  $data_check=[':username_check'=>$username];
 
-                                  $_SESSION["user"] = $username;
-                                  header("Location:../");
+                                  $stmt_check->execute($data_check);
+
+                                  $row_count = $stmt_check->rowCount();
+                                  
+                                  if($row_count!=1)
+                                  {
+
+                                      $sql="INSERT INTO login_users (Username,Password,Status,Created_At) 
+                                      VALUES (:username,:password,'A',CURRENT_TIMESTAMP)";
+                                    
+                                      $stmt = $pdo->prepare($sql);
+
+                                      $data = [
+                                        ":username"=>$username,
+                                        ":password"=>md5($password)
+                                      ];
+
+                                      $stmt->execute($data);
+
+                                      $_SESSION["user"] = $username;
+                                      header("Location:../");
+                                    }
+
+
+                                  else {
+
+                                    $_SESSION["password_message"]="Username already exists. Try again with a different username.";
+                                    header("Location:../signup/");
+
+                                  }
 
                                 }
                                 else {

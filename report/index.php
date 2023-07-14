@@ -19,7 +19,7 @@ session_start();?>
     <div class="container"> 
 
     <div class="card" style="margin-top:15px;">
-        <h2 class="text-center" style="margin-top:10px;">Daily Expenses Tracker Report</h2> 
+        <h2 class="text-center" style="margin-top:10px;">Report Generation & Export</h2> 
         
         <div class="card-body"> 
                     <div class="row">
@@ -84,7 +84,9 @@ session_start();?>
                                                     <th scope="col">Purchased By</th>
                                                     <th scope="col">Date Purchased</th>
                                                     <th scope="col">Remarks</th>
+                                                    <th scope="col">Added By</th>
                                                     <th scope="col">Date Added</th>
+                                                    <th scope="col">Modifed By</th>
                                                     <th scope="col">Date Modifed</th>
                                                     </tr>
                                                 </thead>
@@ -96,7 +98,7 @@ session_start();?>
                                                         try {
 
                                                             $sql = "SELECT Id,Product_Name,Buying_Description,Price,Purchased_By,Date_Purchased,
-                                                            Remarks,Date_Created,Date_Modified,ROW_NUMBER() OVER (ORDER BY Id) Row_Num FROM daily_expenses
+                                                            Remarks,Created_By,Date_Created,Modified_By,Date_Modified,ROW_NUMBER() OVER (ORDER BY Id) Row_Num FROM daily_expenses
                                                             WHERE Date_Created >= '$from_date' AND Date_Created <= '$to_date' ";
 
                                                             $stmt = $pdo->prepare($sql);
@@ -116,7 +118,9 @@ session_start();?>
                                                                     <td><?php echo $row["Purchased_By"]; ?></td>
                                                                     <td><?php echo date("d/m/Y", strtotime($row["Date_Purchased"])); ?></td>
                                                                     <td><?php echo $row["Remarks"]; ?></td>
+                                                                    <td><?php echo $row["Created_By"]; ?></td>
                                                                     <td><?php echo date("d/m/Y", strtotime($row["Date_Created"])); ?></td>
+                                                                    <td><?php echo $row["Modified_By"]; ?></td>
                                                                     <td><?php if($row["Date_Modified"]!=''){ echo date("d/m/Y", strtotime($row["Date_Modified"])); } ?></td>
                                                                     </tr>
                                                 <?php

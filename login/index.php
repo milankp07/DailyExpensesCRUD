@@ -50,7 +50,7 @@ session_start(); ?>
                                   $username=$_POST['username'];
                                   $password=md5($_POST['password']);
 
-                                  $sql="SELECT * FROM login_users WHERE username=:username AND password=:password";
+                                  $sql="SELECT * FROM login_users WHERE username=:username AND password=:password AND status='A'";
                                 
                                   $stmt = $pdo->prepare($sql);
 
