@@ -47,6 +47,13 @@ session_start();?>
                                     <input type="date" class="form-control" name="to_date" id="to_date" placeholder="Enter To Date" required>
                                 </div>
                                 <div class="row-auto">
+                                <label for="purchased_by" class="form-label">Spent By</label>
+                                <select class="form-select" aria-label="Default select example" name="purchased_by" id="purchased_by" required>
+                                    <option value="">Select Spent By</option>
+                                    <?php require "../select/purchased_by.php"; ?>
+                                </select> 
+                                </div>   
+                                <div class="row-auto">
                                     <input type="submit" name="generate_report" value="Generate" class="btn btn-primary mb-3">
                                 </div>
                                 <div class="row-auto">
@@ -72,10 +79,53 @@ session_start();?>
 
                                 $from_date = $_POST['from_date'];
                                 $to_date = $_POST['to_date'];
+                                $purchased_by = $_POST['purchased_by'];
+                                
+
+                                require "../db/database.php";
+                                                        
+                                                        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE,PDO::FETCH_ASSOC);
+                                                        try {
+
+                                                            $sql = "SELECT Id,
+                                                                                Product_Name,
+                                                                                Buying_Description,
+                                                                                Price,
+                                                                                Purchased_By,
+                                                                                Date_Purchased,
+                                                                                Remarks,
+                                                                                Created_By,
+                                                                                Date_Created,
+                                                                                Modified_By,
+                                                                                Date_Modified,
+                                                                                ROW_NUMBER() OVER (ORDER BY Id) Row_Num, 
+                                                                                (SELECT SUM(Price) 
+                                                                                FROM daily_expenses
+                                                                                WHERE Date_Purchased >= '$from_date' AND Date_Purchased <= '$to_date'
+                                                                                AND Purchased_By='$purchased_by') Grand_Total
+                                                                                FROM daily_expenses
+                                                            WHERE Date_Purchased >= '$from_date' AND Date_Purchased <= '$to_date' AND Purchased_By='$purchased_by' ";
+
+                                                            $stmt = $pdo->prepare($sql);
+
+                                                            $stmt->execute();
+                                                    
+                                                            $result = $stmt->fetchAll();
+
+                                                            $result_count=$stmt->rowCount();}
+
+                                                            catch (PDOException $e) {
+                                                                echo $e->getMessage();
+                                                            }
+                                                            
+
+                                if($result_count>0){
+                                    
+
                             ?>
                                     <div style="overflow-x:auto">
-                                    <table id="htmltable" class="table table-stripped table-responsive table-dark" style="width:2000px;">
-                                                <thead class="thead-dark">
+                                    <table id="htmltable" class="table table-striped table-responsive" style="width:2000px;">
+                                                <thead class="table-dark">
                                                     <tr>
                                                     <th scope="col">#</th>
                                                     <th scope="col">Item Name</th>
@@ -92,22 +142,7 @@ session_start();?>
                                                 </thead>
                                                 <tbody>
                                             <?php 
-                                                        require "../db/database.php";
-                                                        
-                                                        $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE,PDO::FETCH_ASSOC);
-                                                        try {
-
-                                                            $sql = "SELECT Id,Product_Name,Buying_Description,Price,Purchased_By,Date_Purchased,
-                                                            Remarks,Created_By,Date_Created,Modified_By,Date_Modified,ROW_NUMBER() OVER (ORDER BY Id) Row_Num FROM daily_expenses
-                                                            WHERE Date_Created >= '$from_date' AND Date_Created <= '$to_date' ";
-
-                                                            $stmt = $pdo->prepare($sql);
-
-                                                            $stmt->execute();
-                                                    
-                                                            $result = $stmt->fetchAll();
-
-                                                            foreach ($result as $row) {
+                                                        foreach ($result as $row) {
 
                                                                 ?>
                                                                     <tr>
@@ -116,36 +151,41 @@ session_start();?>
                                                                     <td><?php echo $row["Buying_Description"]; ?></td>
                                                                     <td><?php echo $row["Price"]; ?></td>
                                                                     <td><?php echo $row["Purchased_By"]; ?></td>
-                                                                    <td><?php echo date("d/m/Y", strtotime($row["Date_Purchased"])); ?></td>
+                                                                    <td><?php if($row["Date_Purchased"]!=''){ echo date("d/m/Y", strtotime($row["Date_Purchased"])); } ?></td>
                                                                     <td><?php echo $row["Remarks"]; ?></td>
                                                                     <td><?php echo $row["Created_By"]; ?></td>
-                                                                    <td><?php echo date("d/m/Y", strtotime($row["Date_Created"])); ?></td>
+                                                                    <td><?php if($row["Date_Created"]!=''){ echo date("d/m/Y", strtotime($row["Date_Created"])); } ?></td>
                                                                     <td><?php echo $row["Modified_By"]; ?></td>
                                                                     <td><?php if($row["Date_Modified"]!=''){ echo date("d/m/Y", strtotime($row["Date_Modified"])); } ?></td>
                                                                     </tr>
-                                                <?php
-                                                            }       
-                                                        } 
-                                                        catch (PDOException $e) {
-                                                            echo $e->getMessage();
-                                                        }
-
-                                                                ?>
+                                                        <?php } ?>
+                                                                    <tr>
+                                                                    <td style="font-weight:900; font-size:large;">Grand Total</td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td style="font-weight:900; font-size:large;"><?php echo $row["Grand_Total"];?></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                    <td></td>
+                                                                   </tr>
+                                                        
+                                                                    
                                                 </tbody>
                                         </table>
                                         </div>
-
-                        <?php        
-
-                        }
-                        else {
-                            ?>
-                        <?php
-                        }
-
-                        ?>
-                    
-                        
+                                                <?php
+                                                                   
+                                                        }
+                                                        else {?>
+                                                            <h4 class="text-centre">No records found. Please change dates and generate again.</h4>
+                                                        <?php
+                                                        }
+                                                     
+                                                    }?> 
                         </div>
                     </div>            
                                         </div>

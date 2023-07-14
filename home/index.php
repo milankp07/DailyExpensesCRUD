@@ -49,8 +49,8 @@ session_start();?>
                             if($result>0){
                             ?>
                                     <div style="overflow-x:auto;">
-                                    <table class="table table-stripped table-responsive table-dark" style="width:2000px;">
-                                                <thead>
+                                    <table class="table table-striped table-responsive" style="width:2000px;">
+                                                <thead class="table-dark">
                                                     <tr>
                                                     <th scope="col">#</th>
                                                     <th scope="col">Item Name</th>
