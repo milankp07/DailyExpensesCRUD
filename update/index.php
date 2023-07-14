@@ -52,26 +52,26 @@ session_start();?>
                     ?>
                     <form action="update_code.php" method="POST">
                     <div class="mb-3">
-                        <label for="product_name" class="form-label">Product Name</label>
-                        <input type="text" name="product_name"  maxlength="100" class="form-control" id="product_name" value="<?php echo $data['Product_Name']; ?>" placeholder="Write product name i.e., toothpaste, gobi etc." required>
+                        <label for="product_name" class="form-label">Item Name</label>
+                        <input type="text" name="product_name"  maxlength="100" class="form-control" id="product_name" value="<?php echo $data['Product_Name']; ?>" placeholder="Write item name i.e., toothpaste, gobi etc." required>
                     </div>
                     <div class="mb-3">
-                        <label for="buying_description" class="form-label">Buying Description</label>
-                        <input type="text" name="buying_description" maxlength="100" class="form-control" id="buying_description" value="<?php echo $data['Buying_Description']; ?>" placeholder="Write product buying description i.e., 1kg, 1 bottle etc." required>
+                        <label for="buying_description" class="form-label">Spending/Buying Description</label>
+                        <input type="text" name="buying_description" maxlength="100" class="form-control" id="buying_description" value="<?php echo $data['Buying_Description']; ?>" placeholder="Write item spending/buying description i.e., 1kg, 1 bottle etc." required>
                     </div>
                     <div class="mb-3">
                         <label for="price" class="form-label" required>Price</label>
-                        <input type="number" name="price" class="form-control" id="price" value="<?php echo $data['Price']; ?>" placeholder="Write price of the product in Rupees." required>
+                        <input type="number" name="price" class="form-control" id="price" value="<?php echo $data['Price']; ?>" placeholder="Write price of the item in Rupees." required>
                     </div>
                     <div class="mb-3">
-                        <label for="purchased_by" class="form-label">Purchased By</label>
+                        <label for="purchased_by" class="form-label">Spent By</label>
                         <select class="form-select" aria-label="" name="purchased_by" id="purchased_by" required>
-                            <option value="">Select Purchased By</option>
+                            <option value="">Select Spent By</option>
                             <?php require "../select/purchased_by_update_page.php"; ?>
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="date_purchased" class="form-label">Date Puchased</label>
+                        <label for="date_purchased" class="form-label">Date Spent</label>
                         <input type="date" name="date_purchased" class="form-control" id="date_purchased" value="<?php echo $data['Date_Purchased']; ?>" placeholder="Choose the date of purchase." required>
                     </div>
                     <div class="mb-3">

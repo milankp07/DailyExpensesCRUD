@@ -78,11 +78,11 @@ session_start();?>
                                                 <thead class="thead-dark">
                                                     <tr>
                                                     <th scope="col">#</th>
-                                                    <th scope="col">Product Name</th>
-                                                    <th scope="col">Buying Description</th>
+                                                    <th scope="col">Item Name</th>
+                                                    <th scope="col">Spending Description</th>
                                                     <th scope="col">Price</th>
-                                                    <th scope="col">Purchased By</th>
-                                                    <th scope="col">Date Purchased</th>
+                                                    <th scope="col">Spent By</th>
+                                                    <th scope="col">Date Spent</th>
                                                     <th scope="col">Remarks</th>
                                                     <th scope="col">Added By</th>
                                                     <th scope="col">Date Added</th>

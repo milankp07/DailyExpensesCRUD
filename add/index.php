@@ -35,26 +35,26 @@ session_start(); ?>
                 <div class="col-md-12">
                     <form action="add_code.php" method="POST">
                     <div class="mb-3">
-                        <label for="product_name" class="form-label">Product Name</label>
-                        <input type="text" name="product_name" maxlength="100" class="form-control" id="product_name" placeholder="Write product name i.e., toothpaste, gobi etc." required>
+                        <label for="product_name" class="form-label">Item Name</label>
+                        <input type="text" name="product_name" maxlength="100" class="form-control" id="product_name" placeholder="Write item name i.e., toothpaste, gobi etc." required>
                     </div>
                     <div class="mb-3">
-                        <label for="buying_description" class="form-label">Buying Description</label>
-                        <input type="text" name="buying_description" maxlength="100" class="form-control" id="buying_description" placeholder="Write product buying description i.e., 1kg, 1 bottle etc." required>
+                        <label for="buying_description" class="form-label">Spending/Buying Description</label>
+                        <input type="text" name="buying_description" maxlength="100" class="form-control" id="buying_description" placeholder="Write item spending/buying description i.e., 1kg, 1 bottle etc." required>
                     </div>
                     <div class="mb-3">
                         <label for="price" class="form-label" required>Price</label>
-                        <input type="number" name="price" class="form-control" id="price" placeholder="Write price of the product in Rupees." required>
+                        <input type="number" name="price" class="form-control" id="price" placeholder="Write price of the item in Rupees." required>
                     </div>
                     <div class="mb-3">
-                        <label for="purchased_by" class="form-label">Purchased By</label>
+                        <label for="purchased_by" class="form-label">Spent By</label>
                         <select class="form-select" aria-label="Default select example" name="purchased_by" id="purchased_by" required>
-                            <option value="">Select Purchased By</option>
+                            <option value="">Select Spent By</option>
                             <?php require "../select/purchased_by.php"; ?>
                         </select>
                     </div>
                     <div class="mb-3">
-                        <label for="date_purchased" class="form-label">Date Puchased</label>
+                        <label for="date_purchased" class="form-label">Date Spent</label>
                         <input type="date" name="date_purchased" class="form-control" max="<?php echo date("d/m/Y"); ?>" id="date_purchased" placeholder="Choose the date of purchase." required>
                     </div>
                     <div class="mb-3">
