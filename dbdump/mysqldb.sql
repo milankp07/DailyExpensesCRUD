@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 12, 2023 at 03:18 PM
+-- Generation Time: Jul 14, 2023 at 03:21 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -35,7 +35,9 @@ CREATE TABLE `daily_expenses` (
   `Purchased_By` varchar(50) NOT NULL,
   `Date_Purchased` date NOT NULL,
   `Remarks` varchar(100) DEFAULT NULL,
+  `Created_By` varchar(50) NOT NULL,
   `Date_Created` date NOT NULL,
+  `Modified_By` varchar(50) DEFAULT NULL,
   `Date_Modified` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -49,6 +51,7 @@ CREATE TABLE `login_users` (
   `Id` int(11) NOT NULL,
   `Username` varchar(50) NOT NULL,
   `Password` varchar(50) NOT NULL,
+  `Status` text NOT NULL,
   `Created_At` date NOT NULL,
   `Modified_At` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -91,13 +94,15 @@ ALTER TABLE `daily_expenses`
 -- Indexes for table `login_users`
 --
 ALTER TABLE `login_users`
-  ADD PRIMARY KEY (`Id`);
+  ADD PRIMARY KEY (`Id`),
+  ADD UNIQUE KEY `Username` (`Username`);
 
 --
 -- Indexes for table `select_options`
 --
 ALTER TABLE `select_options`
-  ADD PRIMARY KEY (`Id`);
+  ADD PRIMARY KEY (`Id`),
+  ADD UNIQUE KEY `Value` (`Value`,`Display_Name`,`Type`);
 
 --
 -- AUTO_INCREMENT for dumped tables
