@@ -67,7 +67,7 @@ session_start();?>
                         <label for="purchased_by" class="form-label">Spent By</label>
                         <select class="form-select" aria-label="" name="purchased_by" id="purchased_by" required>
                             <option value="">Select Spent By</option>
-                            <?php require "../select/purchased_by_update_page.php"; ?>
+                            <?php ob_start(); require "../select/purchased_by_update_page.php"; ?>
                         </select>
                     </div>
                     <div class="mb-3">

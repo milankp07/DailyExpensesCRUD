@@ -50,7 +50,7 @@ session_start();?>
                                 <label for="purchased_by" class="form-label">Spent By</label>
                                 <select class="form-select" aria-label="Default select example" name="purchased_by" id="purchased_by" required>
                                     <option value="">Select Spent By</option>
-                                    <?php require "../select/purchased_by.php"; ?>
+                                    <?php ob_start(); require "../select/purchased_by.php"; ?>
                                 </select> 
                                 </div>   
                                 <div class="row-auto">
@@ -149,7 +149,7 @@ session_start();?>
                                                                     <th scope="row"><?php echo $row["Row_Num"]; ?></th>
                                                                     <td><?php echo $row["Product_Name"]; ?></td>
                                                                     <td><?php echo $row["Buying_Description"]; ?></td>
-                                                                    <td><?php echo $row["Price"]; ?></td>
+                                                                    <td><?php echo $row["Price"]." ₹"; ?></td>
                                                                     <td><?php echo $row["Purchased_By"]; ?></td>
                                                                     <td><?php if($row["Date_Purchased"]!=''){ echo date("d/m/Y", strtotime($row["Date_Purchased"])); } ?></td>
                                                                     <td><?php echo $row["Remarks"]; ?></td>
@@ -163,7 +163,7 @@ session_start();?>
                                                                     <td style="font-weight:900; font-size:large;">Grand Total</td>
                                                                     <td></td>
                                                                     <td></td>
-                                                                    <td style="font-weight:900; font-size:large;"><?php echo $row["Grand_Total"];?></td>
+                                                                    <td style="font-weight:900; font-size:large;"><?php echo $row["Grand_Total"]." ₹";?></td>
                                                                     <td></td>
                                                                     <td></td>
                                                                     <td></td>

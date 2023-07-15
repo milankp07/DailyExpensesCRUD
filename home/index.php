@@ -90,7 +90,7 @@ session_start();?>
                                                                     <th scope="row"><?php echo $row["Row_Num"]; ?></th>
                                                                     <td><?php echo $row["Product_Name"]; ?></td>
                                                                     <td><?php echo $row["Buying_Description"]; ?></td>
-                                                                    <td><?php echo $row["Price"]; ?></td>
+                                                                    <td><?php echo $row["Price"]." ₹"; ?></td>
                                                                     <td><?php echo $row["Purchased_By"]; ?></td>
                                                                     <td><?php echo date("d/m/Y", strtotime($row["Date_Purchased"])); ?></td>
                                                                     <td><?php echo $row["Remarks"]; ?></td>
