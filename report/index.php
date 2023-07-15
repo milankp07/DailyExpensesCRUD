@@ -81,7 +81,6 @@ session_start();?>
                                 $to_date = $_POST['to_date'];
                                 $purchased_by = $_POST['purchased_by'];
                                 
-
                                 require "../db/database.php";
                                                         
                                                         $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE,PDO::FETCH_ASSOC);
