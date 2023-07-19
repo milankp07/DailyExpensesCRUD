@@ -8,7 +8,8 @@ session_start();?>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Daily Expense Tracker | Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-  </head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</head>
   <body background="../img/background_image.jpg">
     <?php
         if(!isset($_SESSION["user"])){
@@ -49,21 +50,15 @@ session_start();?>
                             if($result>0){
                             ?>
                                     <div style="overflow-x:auto;">
-                                    <table class="table table-striped table-responsive" style="width:2000px;">
+                                    <table class="table table-striped table-responsive" style="width:340px;">
                                                 <thead class="table-dark">
                                                     <tr>
-                                                    <th scope="col">#</th>
+                                                    <th scope="col" colspan="4">The last 7 expenses.</th>
+                                                    </tr>
+                                                    <tr>
                                                     <th scope="col">Item Name</th>
-                                                    <th scope="col">Spending Description</th>
-                                                    <th scope="col">Price</th>
-                                                    <th scope="col">Spent By</th>
-                                                    <th scope="col">Date Spent</th>
-                                                    <th scope="col">Remarks</th>
                                                     <th scope="col">Added By</th>
-                                                    <th scope="col">Date Added</th>
-                                                    <th scope="col">Modifed By</th>
-                                                    <th scope="col">Date Modifed</th>
-                                                    <th scope="col">Edit/Delete Record</th>
+                                                    <th scope="col">See/Edit/Delete</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -75,7 +70,7 @@ session_start();?>
 
                                                             $sql = "SELECT Id,Product_Name,Buying_Description,Price,Purchased_By,Date_Purchased,
                                                             Remarks,Created_By,Date_Created,Modified_By,Date_Modified,ROW_NUMBER() OVER (ORDER BY Id DESC) Row_Num 
-                                                            FROM daily_expenses LIMIT 10";
+                                                            FROM daily_expenses LIMIT 7";
 
                                                             $stmt = $pdo->prepare($sql);
 
@@ -87,19 +82,81 @@ session_start();?>
 
                                                                 ?>
                                                                     <tr>
-                                                                    <th scope="row"><?php echo $row["Row_Num"]; ?></th>
-                                                                    <td><?php echo $row["Product_Name"]; ?></td>
-                                                                    <td><?php echo $row["Buying_Description"]; ?></td>
-                                                                    <td><?php echo $row["Price"]." ₹"; ?></td>
-                                                                    <td><?php echo $row["Purchased_By"]; ?></td>
-                                                                    <td><?php echo date("d/m/Y", strtotime($row["Date_Purchased"])); ?></td>
-                                                                    <td><?php echo $row["Remarks"]; ?></td>
-                                                                    <td><?php echo $row["Created_By"]; ?></td>
-                                                                    <td><?php echo date("d/m/Y", strtotime($row["Date_Created"])); ?></td>
-                                                                    <td><?php echo $row["Modified_By"]; ?></td>
-                                                                    <td><?php if($row["Date_Modified"]!=''){ echo date("d/m/Y", strtotime($row["Date_Modified"])); } ?></td>
-                                                                    <td><a href="../update/?id=<?php echo $row["Id"];?>" class="btn btn-primary">Edit</a> <a href="../delete/delete_code.php?id=<?php echo $row["Id"];?>" class="btn btn-primary" onclick="return confirm('Are you sure?')">Delete</a></td>
-                                                                    </tr>
+                                                                    <td><?php echo substr($row["Product_Name"],0,10).".."; ?></td>
+                                                                    <td><?php echo substr($row["Created_By"],0,10).".."; ?></td>
+                                                                    <td>
+                                                                    
+                                                                                <i class="bi bi-eye-fill" data-bs-toggle="modal" data-bs-target="#myModal">
+                                                                                </i>                                                              
+            
+
+
+            <!-- The Modal -->
+            <div class="modal" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Expense Details</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    
+                <form action="update_code.php" method="POST">
+                                <div class="mb-3">
+                                    <label for="product_name" class="form-label">Item Name</label>
+                                    <input type="text" name="product_name"  maxlength="100" class="form-control" id="product_name" value="<?php echo $row['Product_Name']; ?>" placeholder="Write item name i.e., toothpaste, gobi etc." readonly>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="buying_description" class="form-label">Spending/Buying Description</label>
+                                    <input type="text" name="buying_description" maxlength="100" class="form-control" id="buying_description" value="<?php echo $row['Buying_Description']; ?>" placeholder="Write item spending/buying description i.e., 1kg, 1 bottle etc." readonly>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="price" class="form-label">Price</label>
+                                    <input type="number" name="price" class="form-control" id="price" value="<?php echo $row['Price']; ?>" placeholder="Write price of the item in Rupees." readonly>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="purchased_by" class="form-label">Spent By</label>
+                                    <select class="form-select" aria-label="" name="purchased_by" id="purchased_by" readonly>
+                                        <option value="">Select Spent By</option>
+                                        <option value="<?php echo $row["Purchased_By"]?>" selected><?php echo $row["Purchased_By"]?></option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="date_purchased" class="form-label">Date Spent</label>
+                                    <input type="date" name="date_purchased" class="form-control" id="date_purchased" value="<?php echo $row['Date_Purchased']; ?>" placeholder="Choose the date of purchase." readonly>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="remarks" class="form-label">Additional Remarks (Optional)</label>
+                                    <input type="text" name="remarks" maxlength="100" class="form-control" id="remarks" value="<?php echo $row['Remarks']; ?>" placeholder="Write any additional remarks if required." readonly>
+                                </div>
+                
+                                </form>                                                      
+
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                </div>
+
+                </div>
+            </div>
+            </div>
+
+                <a href="../update/?id=<?php echo $row["Id"];?>" class="text-secondary"><i class="bi bi-pen" style="margin-left:25px;"></i></a>
+                <a href="../delete/delete_code.php?id=<?php echo $row["Id"];?>" class="text-danger" onclick="return confirm('Are you sure?')" style="margin-left:25px;"><i class="bi bi-trash3-fill"></i></a>
+
+
+                                                            </td>
+
+
+
+
+                                                                </tr>
                                                 <?php
                                                             }       
                                                         } 

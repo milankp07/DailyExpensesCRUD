@@ -97,7 +97,7 @@ session_start();?>
                                                                                 Date_Created,
                                                                                 Modified_By,
                                                                                 Date_Modified,
-                                                                                ROW_NUMBER() OVER (ORDER BY Id) Row_Num, 
+                                                                                ROW_NUMBER() OVER (ORDER BY Date_Purchased) Row_Num, 
                                                                                 (SELECT SUM(Price) 
                                                                                 FROM daily_expenses
                                                                                 WHERE Date_Purchased >= '$from_date' AND Date_Purchased <= '$to_date'
