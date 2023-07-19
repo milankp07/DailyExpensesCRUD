@@ -50,10 +50,10 @@ session_start();?>
                             if($result>0){
                             ?>
                                     <div style="overflow-x:auto;">
-                                    <table class="table table-striped table-responsive" style="width:340px;">
+                                    <table class="table table-striped table-responsive" style="width:auto;">
                                                 <thead class="table-dark">
                                                     <tr>
-                                                    <th scope="col" colspan="4">The last 10 expenses.</th>
+                                                    <th scope="col" colspan="4">The last 10 expenses. (On mobile, please scroll down if not completely visible.)</th>
                                                     </tr>
                                                     <tr>
                                                     <th scope="col">Item Name</th>
