@@ -53,7 +53,7 @@ session_start();?>
                                     <table class="table table-striped table-responsive" style="width:340px;">
                                                 <thead class="table-dark">
                                                     <tr>
-                                                    <th scope="col" colspan="4">The last 7 expenses.</th>
+                                                    <th scope="col" colspan="4">The last 10 expenses.</th>
                                                     </tr>
                                                     <tr>
                                                     <th scope="col">Item Name</th>
@@ -70,7 +70,7 @@ session_start();?>
 
                                                             $sql = "SELECT Id,Product_Name,Buying_Description,Price,Purchased_By,Date_Purchased,
                                                             Remarks,Created_By,Date_Created,Modified_By,Date_Modified,ROW_NUMBER() OVER (ORDER BY Id DESC) Row_Num 
-                                                            FROM daily_expenses LIMIT 7";
+                                                            FROM daily_expenses LIMIT 10";
 
                                                             $stmt = $pdo->prepare($sql);
 
@@ -86,7 +86,7 @@ session_start();?>
                                                                     <td><?php echo substr($row["Created_By"],0,10).".."; ?></td>
                                                                     <td>
                                                                     
-                                                                                <i class="bi bi-eye-fill" data-bs-toggle="modal" data-bs-target="#myModal">
+                                                                                <i class="bi bi-eye-fill" data-bs-toggle="modal" data-bs-target="#myModal" style="cursor:pointer;">
                                                                                 </i>                                                              
             
 
@@ -120,7 +120,7 @@ session_start();?>
                                 </div>
                                 <div class="mb-3">
                                     <label for="purchased_by" class="form-label">Spent By</label>
-                                    <select class="form-select" aria-label="" name="purchased_by" id="purchased_by" readonly>
+                                    <select class="form-select" aria-label="" name="purchased_by" id="purchased_by" disabled>
                                         <option value="">Select Spent By</option>
                                         <option value="<?php echo $row["Purchased_By"]?>" selected><?php echo $row["Purchased_By"]?></option>
                                     </select>
@@ -147,7 +147,7 @@ session_start();?>
             </div>
             </div>
 
-                <a href="../update/?id=<?php echo $row["Id"];?>" class="text-secondary"><i class="bi bi-pen" style="margin-left:25px;"></i></a>
+                <a href="../update/?id=<?php echo $row["Id"];?>" class="text-secondary" style="margin-left:25px;"><i class="bi bi-pen"></i></a>
                 <a href="../delete/delete_code.php?id=<?php echo $row["Id"];?>" class="text-danger" onclick="return confirm('Are you sure?')" style="margin-left:25px;"><i class="bi bi-trash3-fill"></i></a>
 
 
