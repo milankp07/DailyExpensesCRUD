@@ -13,12 +13,15 @@ if(isset($_GET['id'])){
 
     require "../db/database.php";
 
-    $sql = "DELETE FROM daily_expenses WHERE id=:id";
+    $sql = "UPDATE daily_expenses SET Action_=:action_,Date_Modified=CURRENT_TIMESTAMP,Modified_By=:modified_by WHERE id=:id";
 
     $stmt=$pdo->prepare($sql);
 
     $data = [
-        ':id'=>$Id
+        ':id'=>$Id,
+        ':action_'=>'D',
+        ':modified_by'=>$_SESSION['user']
+
     ];
 
     $stmt->execute($data);

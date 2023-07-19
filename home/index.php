@@ -70,7 +70,7 @@ session_start();?>
 
                                                             $sql = "SELECT Id,Product_Name,Buying_Description,Price,Purchased_By,Date_Purchased,
                                                             Remarks,Created_By,Date_Created,Modified_By,Date_Modified,ROW_NUMBER() OVER (ORDER BY Id DESC) Row_Num 
-                                                            FROM daily_expenses LIMIT 10";
+                                                            FROM daily_expenses WHERE Action_ != 'D'  LIMIT 10";
 
                                                             $stmt = $pdo->prepare($sql);
 

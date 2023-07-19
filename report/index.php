@@ -103,7 +103,7 @@ session_start();?>
                                                                                 WHERE Date_Purchased >= '$from_date' AND Date_Purchased <= '$to_date'
                                                                                 AND Purchased_By='$purchased_by') Grand_Total
                                                                                 FROM daily_expenses
-                                                            WHERE Date_Purchased >= '$from_date' AND Date_Purchased <= '$to_date' AND Purchased_By='$purchased_by' ";
+                                                            WHERE Date_Purchased >= '$from_date' AND Date_Purchased <= '$to_date' AND Purchased_By='$purchased_by' AND Action_ != 'D'";
 
                                                             $stmt = $pdo->prepare($sql);
 

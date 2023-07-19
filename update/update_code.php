@@ -21,7 +21,7 @@
 
     try {
             $sql = "UPDATE daily_expenses SET Product_Name=:product_name,Buying_Description=:buying_description,Price=:price,
-            Purchased_By=:purchased_by,Date_Purchased=:date_purchased,Remarks=:remarks,Modified_By=:modified_by,Date_Modified=CURRENT_TIMESTAMP WHERE Id=:row_id";
+            Purchased_By=:purchased_by,Date_Purchased=:date_purchased,Remarks=:remarks,Action_=:action_,Modified_By=:modified_by,Date_Modified=CURRENT_TIMESTAMP WHERE Id=:row_id";
 
             $stmt=$pdo->prepare($sql);
 
@@ -33,7 +33,8 @@
                 ':date_purchased'=>$date_purchased,
                 ':remarks'=>$remarks,
                 ':row_id'=>$row_id,
-                ':modified_by'=>$_SESSION['user']
+                ':modified_by'=>$_SESSION['user'],
+                ':action_'=>'U'
             ];
             
             $stmt->execute($data);

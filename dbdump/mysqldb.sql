@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 14, 2023 at 03:21 AM
+-- Generation Time: Jul 19, 2023 at 02:10 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -35,11 +35,21 @@ CREATE TABLE `daily_expenses` (
   `Purchased_By` varchar(50) NOT NULL,
   `Date_Purchased` date NOT NULL,
   `Remarks` varchar(100) DEFAULT NULL,
+  `Action_` text NOT NULL,
   `Created_By` varchar(50) NOT NULL,
   `Date_Created` date NOT NULL,
   `Modified_By` varchar(50) DEFAULT NULL,
   `Date_Modified` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `daily_expenses`
+--
+
+INSERT INTO `daily_expenses` (`Id`, `Product_Name`, `Buying_Description`, `Price`, `Purchased_By`, `Date_Purchased`, `Remarks`, `Action_`, `Created_By`, `Date_Created`, `Modified_By`, `Date_Modified`) VALUES
+(1, 'Test', 'test', 10, 'Milan Kumar Pani', '2023-07-10', 'tests', 'U', 'mkp', '2023-07-14', 'mkp', '2023-07-19'),
+(2, 'test', 'test', 212, 'Srustisneha Dash', '2023-08-10', 'teets', 'D', 'mkp', '2023-07-15', 'mkp', '2023-07-19'),
+(3, 'test2', 'test2', 1223, 'Milan Kumar Pani', '2023-05-01', '323', 'N', 'mkp', '2023-07-19', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -55,6 +65,13 @@ CREATE TABLE `login_users` (
   `Created_At` date NOT NULL,
   `Modified_At` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `login_users`
+--
+
+INSERT INTO `login_users` (`Id`, `Username`, `Password`, `Status`, `Created_At`, `Modified_At`) VALUES
+(1, 'mkp', '39d40eacf1a803b072dc739dd4750a49', 'A', '2023-07-14', NULL);
 
 -- --------------------------------------------------------
 
@@ -112,13 +129,13 @@ ALTER TABLE `select_options`
 -- AUTO_INCREMENT for table `daily_expenses`
 --
 ALTER TABLE `daily_expenses`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `login_users`
 --
 ALTER TABLE `login_users`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `select_options`

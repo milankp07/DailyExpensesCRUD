@@ -19,7 +19,7 @@
          $remarks=$_POST["remarks"];
 
     try {
-            $sql = "INSERT INTO daily_expenses(Product_Name,Buying_Description,Price,Purchased_By,Date_Purchased,Remarks,Created_By,Date_Created) VALUES (:product_name,:buying_description,:price,:purchased_by,:date_purchased,:remarks,:created_by,CURRENT_TIMESTAMP)";
+            $sql = "INSERT INTO daily_expenses(Product_Name,Buying_Description,Price,Purchased_By,Date_Purchased,Remarks,Action_,Created_By,Date_Created) VALUES (:product_name,:buying_description,:price,:purchased_by,:date_purchased,:remarks,:action_,:created_by,CURRENT_TIMESTAMP)";
             
             $stmt=$pdo->prepare($sql);
 
@@ -30,7 +30,8 @@
                 ':purchased_by'=>$purchased_by,
                 ':date_purchased'=>$date_purchased,
                 ':remarks'=>$remarks,
-                ':created_by'=>$_SESSION['user']
+                ':created_by'=>$_SESSION['user'],
+                ':action_'=>'N'
             ];
             
             $stmt->execute($data);
