@@ -86,13 +86,13 @@ session_start();?>
                                                                     <td><?php echo substr($row["Created_By"],0,10).".."; ?></td>
                                                                     <td>
                                                                     
-                                                                                <i class="bi bi-eye-fill" data-bs-toggle="modal" data-bs-target="#myModal" style="cursor:pointer;">
+                                                                                <i class="bi bi-eye-fill" data-bs-toggle="modal" data-bs-target="<?php echo "#myModal".$row["Id"]; ?>" style="cursor:pointer;">
                                                                                 </i>                                                              
             
 
 
             <!-- The Modal -->
-            <div class="modal" id="myModal">
+            <div class="modal" id="<?php echo "myModal".$row["Id"]; ?>">
             <div class="modal-dialog">
                 <div class="modal-content">
 
@@ -151,7 +151,7 @@ session_start();?>
                 <a href="../delete/delete_code.php?id=<?php echo $row["Id"];?>" class="text-danger" onclick="return confirm('Are you sure?')" style="margin-left:25px;"><i class="bi bi-trash3-fill"></i></a>
 
 
-                                                            </td>
+                                                                </td>
 
 
 
